@@ -119,17 +119,17 @@ console.log(
 */
 
 //Code Here
-// const totalPopulation = obj => {
-//   let { utah, california, texas, arizona } = obj;
-//   let accumulator = 0;
-//   for (let pop in obj) {
-//     obj[pop] = +obj[pop];
-//     accumulator = heldPop + obj[pop];
-//   }
-//   return accumulator;
-// };
+const totalPopulation = obj => {
+  let { utah, california, texas, arizona } = obj;
+  let currentSumPop = 0;
+  for (let pop in obj) {
+    obj[pop] = +obj[pop];
+    currentSumPop = currentSumPop + obj[pop];
+  }
+  return currentSumPop;
+};
 
-// console.log(totalPopulation({ utah: 1, california: 2, texas: 3, arizona: 4 }));
+console.log(totalPopulation({ utah: 1, california: 2, texas: 3, arizona: 4 }));
 
 //////////////////////////// PROBLEM 9 ////////////////////////////
 
@@ -145,14 +145,14 @@ console.log(
 let array = [];
 
 function ingredients(object) {
-  let { crab, fat, protein } = object;
+  let { carb, fat, protein } = object;
   for (let food in object) {
     array.push(object[food]);
   }
   return array;
 }
 let ingredients2 = ingredients({
-  crab: 'sweet potato',
+  carb: 'sweet potato',
   fat: 'pork-belly',
   protein: 'whey',
 });
@@ -368,12 +368,25 @@ console.log(helensInfo);
 */
 
 //Code Here
+class Vehicle {
+  constructor(capacity, color, mileage) {
+    this.capacity = capacity;
+    this.color = color;
+    this.mileage = mileage;
+  }
+
+  move(miles) {
+    this.mileage += miles;
+    console.log(this.mileage);
+  }
+}
 
 /*
   Create a vehicle using your new class and save it to a variable called myFirstVehicle
 */
 
 //Code Here
+let hondaCivic = new Vehicle(5, 'white', 20000);
 
 /* 
   Now we'll create a class that's based off of the vehicle class. 
@@ -384,16 +397,26 @@ console.log(helensInfo);
 */
 
 //Code Here
+class Motorcycle extends Vehicle {
+  constructor(capacity, color, mileage, make, isCool) {
+    super(capacity, color, mileage);
+    this.make = make;
+    this.isCool = isCool;
+  }
+}
 
 /*
   Create a Motorcycle using your new class and save it to a variable called myFirstMotorcycle
 */
 
 //Code Here
+let harleyDavidson = new Motorcycle(2, 'black', 10000, 'unknown', true);
 
 /*
   Call the move function on myFirstMotorcycle (don't forget the parameter)
 */
+
+harleyDavidson.move(60);
 
 /*
   Let's make another class based off of Vehicle. 
@@ -412,6 +435,27 @@ console.log(helensInfo);
 */
 
 //Code Here
+class Boat extends Vehicle {
+  constructor(capacity, color, mileage, name, type, isSeaWorthy) {
+    super(capacity, color, mileage);
+    this.name = name;
+    this.type = type;
+    this.isSeaWorthy = isSeaWorthy;
+  }
+
+  checkSeaWorthiness() {
+    if (this.isSeaWorthy === true) {
+      console.log(`The ${this.color} ${this.type} ${this.name} is seaworthy!`);
+    } else {
+      console.log(`You need to get your ${this.type} in shape!`);
+    }
+  }
+
+  performMaintenance() {
+    this.isSeaWorthy = true;
+    console.log(this.isSeaWorthy);
+  }
+}
 
 /*
   Create a new boat using your class. You can choose whatever values you like for all the 
@@ -419,21 +463,25 @@ console.log(helensInfo);
 */
 
 //Code Here
+let myFirstBoat = new Boat(10000, 'white', 30000, 'Yachty', 'yacht', false);
 
 /*
   Call the checkSeaworthiness method on your new boat
 */
 
 //Code Here
+myFirstBoat.checkSeaWorthiness();
 
 /*
   Now run the performMaintenance method on your boat
 */
 
 //Code Here
+myFirstBoat.performMaintenance();
 
 /*
   Check the seaworthiness once more (you should be ready for the water!)
 */
 
 //Code Here
+myFirstBoat.checkSeaWorthiness();
